@@ -17,17 +17,18 @@ import lombok.extern.log4j.Log4j;
 @Component
 @Profile("default")
 public class JmsReceiver {
-	
-	@Autowired
-	private ReceiverService receiverService;
-	
-	/**
-	 * It is called on message arrived from JMS to given destination. 
-	 * @param message {@link MessageFromBackend}
-	 */
-	@JmsListener(destination = "${jms.queue.to.ui.name}")
-	public void receiveMessage(final MessageFromBackend message) {
-		log.info("Received <" + message + ">");
-		receiverService.persist(message);
-	}
+
+  @Autowired
+  private ReceiverService receiverService;
+
+  /**
+   * It is called on message arrived from JMS to given destination.
+   * 
+   * @param message {@link MessageFromBackend}
+   */
+  @JmsListener(destination = "${jms.queue.to.ui.name}")
+  public void receiveMessage(final MessageFromBackend message) {
+    log.info("Received <" + message + ">");
+    receiverService.persist(message);
+  }
 }

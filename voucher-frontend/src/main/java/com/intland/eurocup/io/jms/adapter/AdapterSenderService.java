@@ -11,24 +11,25 @@ import com.intland.eurocup.io.jms.JmsSender;
 import com.intland.eurocup.model.Voucher;
 
 /**
- * Adapter between JMS and the application. Converts voucher into outgoing message and passes message to JMS.
+ * Adapter between JMS and the application. Converts voucher into outgoing
+ * message and passes message to JMS.
  */
 @Component
 @Profile("default")
 public class AdapterSenderService implements SenderService {
-	@Autowired
-	private ResponseStorage responseStorage;
-	
-	@Autowired
-	private MessageConverter messageConverter;
+  @Autowired
+  private ResponseStorage responseStorage;
 
-	@Autowired
-	private JmsSender sender;
+  @Autowired
+  private MessageConverter messageConverter;
 
-	@Override
-	public void send(final Voucher voucher) {
-		final MessageFromFrontend message = messageConverter.convert(voucher);
-		responseStorage.registerRequestId(voucher.getId());
-		sender.send(message);
-	}
+  @Autowired
+  private JmsSender sender;
+
+  @Override
+  public void send(final Voucher voucher) {
+    final MessageFromFrontend message = messageConverter.convert(voucher);
+    responseStorage.registerRequestId(voucher.getId());
+    sender.send(message);
+  }
 }

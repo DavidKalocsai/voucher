@@ -11,10 +11,13 @@ import lombok.ToString;
  * Domain of Voucher to be submitted to back end application.
  *
  */
-@Getter @Setter @ToString @EqualsAndHashCode
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 public class Voucher {
-	private Long id;
-	private String code;
-	private String email;
-	private Territory territory;	
+  private Long id;
+  private String code;
+  private String email;
+  private Territory territory;
 }

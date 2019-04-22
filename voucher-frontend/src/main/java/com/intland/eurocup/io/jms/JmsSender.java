@@ -16,20 +16,21 @@ import com.intland.eurocup.common.jms.model.MessageFromFrontend;
 @Component
 @Profile("default")
 public class JmsSender {
-	Logger logger = LoggerFactory.getLogger(JmsSender.class);
-	
-	@Value("${jms.queue.from.ui.name}")
-	private String queueName;
-	
-	@Autowired
-	private JmsTemplate jmsTemplate;
-	
-	/**
-	 * Sends message to destination.
-	 * @param message {@link MessageFromFrontend}
-	 */
-	public void send(final MessageFromFrontend message) {
-			logger.info("Frontend sends - " + message);
-			jmsTemplate.convertAndSend(queueName, message);
-	}
+  Logger logger = LoggerFactory.getLogger(JmsSender.class);
+
+  @Value("${jms.queue.from.ui.name}")
+  private String queueName;
+
+  @Autowired
+  private JmsTemplate jmsTemplate;
+
+  /**
+   * Sends message to destination.
+   * 
+   * @param message {@link MessageFromFrontend}
+   */
+  public void send(final MessageFromFrontend message) {
+    logger.info("Frontend sends - " + message);
+    jmsTemplate.convertAndSend(queueName, message);
+  }
 }

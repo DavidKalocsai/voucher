@@ -12,15 +12,16 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class WelcomeController {
-	private static final String WELCOME_PAGE = "welcome";
-	
-	/**
-	 * Welcome page end point.
-	 * @return welcome page
-	 */
-	@RequestMapping("/")
-	public String welcome() {
-		log.info("Welcome");
-		return WELCOME_PAGE;
-	}
+  private static final String WELCOME_PAGE = "welcome";
+
+  /**
+   * Welcome page end point.
+   * 
+   * @return welcome page
+   */
+  @RequestMapping("/")
+  public String welcome() {
+    log.info("Welcome");
+    return WELCOME_PAGE;
+  }
 }

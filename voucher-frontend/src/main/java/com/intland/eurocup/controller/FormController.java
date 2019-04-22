@@ -22,36 +22,38 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Controller
 public class FormController {
-	private static final String FORM_URL = "{territory}/form";
-	
-	@Autowired
-	private ModelViewFactory modelViewFactory;
+  private static final String FORM_URL = "{territory}/form";
 
-	/**
-	 * Add new custom converter, that converts string to {@link Territory}. 
-	 * @param webdataBinder {@link WebDataBinder}
-	 */
-	@InitBinder
-	public void initBinder(final WebDataBinder webdataBinder) {
-		webdataBinder.registerCustomEditor(Territory.class, new TerritoryConverter());
-	}
+  @Autowired
+  private ModelViewFactory modelViewFactory;
 
-	/**
-	 * Builds and returns model and view of submit form. 
-	 * @param territory {@link Territory}
-	 * @return
-	 */
-	@GetMapping(value = FORM_URL)
-	public ModelAndView showSubmitForm(@PathVariable Territory territory) {
-		log.info("Show SubmitForm territory: " + territory);
-		return modelViewFactory.getModelView(ModelViewType.VOUCHER_FORM_VIEW, getDefaultVoucher(territory));
-	}
-	
-	private Voucher getDefaultVoucher(final Territory territory) {
-		final Voucher voucher = new Voucher();
-		voucher.setCode("ABCDEF1234");
-		voucher.setEmail("test@gmail.com");
-		voucher.setTerritory(territory);
-		return voucher;
-	}
+  /**
+   * Add new custom converter, that converts string to {@link Territory}.
+   * 
+   * @param webdataBinder {@link WebDataBinder}
+   */
+  @InitBinder
+  public void initBinder(final WebDataBinder webdataBinder) {
+    webdataBinder.registerCustomEditor(Territory.class, new TerritoryConverter());
+  }
+
+  /**
+   * Builds and returns model and view of submit form.
+   * 
+   * @param territory {@link Territory}
+   * @return
+   */
+  @GetMapping(value = FORM_URL)
+  public ModelAndView showSubmitForm(@PathVariable Territory territory) {
+    log.info("Show SubmitForm territory: " + territory);
+    return modelViewFactory.getModelView(ModelViewType.VOUCHER_FORM_VIEW, getDefaultVoucher(territory));
+  }
+
+  private Voucher getDefaultVoucher(final Territory territory) {
+    final Voucher voucher = new Voucher();
+    voucher.setCode("ABCDEF1234");
+    voucher.setEmail("test@gmail.com");
+    voucher.setTerritory(territory);
+    return voucher;
+  }
 }

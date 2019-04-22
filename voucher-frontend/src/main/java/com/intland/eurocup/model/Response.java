@@ -12,19 +12,28 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Response {
-	private ResponseStatus status;
-	private String message;
-	private DateTime createdDate; 
-		
-	public Response() {
-		status = ResponseStatus.NO;
-		message = "";
-		createdDate = DateTime.now();
-	}
-	
-	public Response(final ResponseStatus responseStatus, final String message) {
-		status = responseStatus;
-		this.message = message;
-		createdDate = DateTime.now();
-	}
+  private ResponseStatus status;
+  private String message;
+  private DateTime createdDate;
+
+  /**
+   * Default constructor to be used, when adding empty response.
+   */
+  public Response() {
+    status = ResponseStatus.NO;
+    message = "";
+    createdDate = DateTime.now();
+  }
+
+  /**
+   * Constructor to be used, when response arrived.
+   * 
+   * @param responseStatus {@link ResponseStatus}
+   * @param message Message to be passed to UI
+   */
+  public Response(final ResponseStatus responseStatus, final String message) {
+    status = responseStatus;
+    this.message = message;
+    createdDate = DateTime.now();
+  }
 }
