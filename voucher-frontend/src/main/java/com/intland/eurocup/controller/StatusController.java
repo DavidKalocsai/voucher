@@ -70,7 +70,7 @@ public class StatusController {
 
   private Voucher setUpRequestId(final Voucher voucher) {
     final Long requestId = uniqueRequestIdGenerator.getNext();
-    responseStorage.registerRequestId(requestId);
+    responseStorage.register(requestId);
     voucher.setId(requestId);
     return voucher;
   }

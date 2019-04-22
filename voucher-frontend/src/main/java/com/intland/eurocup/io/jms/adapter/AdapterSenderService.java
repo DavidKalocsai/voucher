@@ -29,7 +29,7 @@ public class AdapterSenderService implements SenderService {
   @Override
   public void send(final Voucher voucher) {
     final MessageFromFrontend message = messageConverter.convert(voucher);
-    responseStorage.registerRequestId(voucher.getId());
+    responseStorage.register(voucher.getId());
     sender.send(message);
   }
 }

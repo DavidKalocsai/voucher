@@ -14,7 +14,7 @@ public interface ResponseStorage {
    * 
    * @param requestId id to register.
    */
-  void registerRequestId(Long requestId);
+  void register(Long requestId);
 
   /**
    * Save response in storage if request id is found it storage.
@@ -31,5 +31,11 @@ public interface ResponseStorage {
    * @param id identifies response.
    * @return {@link Response}.
    */
-  Response getResponse(Long id);
+  Response get(Long id);
+  
+  /**
+   * Clean up storage. Remove left-overs.
+   */
+  void clean();
+  
 }

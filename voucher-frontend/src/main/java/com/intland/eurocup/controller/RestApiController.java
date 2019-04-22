@@ -32,6 +32,6 @@ public class RestApiController {
   @GetMapping(value = URL_FETCH_REPSONSE)
   public Response fetchResponse(final Long responseId) {
     log.info("Fetching repsone: " + responseId);
-    return responseStorage.getResponse(responseId);
+    return responseStorage.get(responseId);
   }
 }

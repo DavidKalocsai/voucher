@@ -43,7 +43,7 @@ public class MockIoService implements SenderService {
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      responseStorage.registerRequestId(id);
+      responseStorage.register(id);
       responseStorage.save(id, getResponse());
     };
     Thread t = new Thread(runnable);

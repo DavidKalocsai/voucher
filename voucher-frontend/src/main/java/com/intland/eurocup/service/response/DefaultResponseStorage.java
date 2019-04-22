@@ -8,7 +8,6 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import com.intland.eurocup.model.Response;
 import com.intland.eurocup.model.ResponseStatus;
@@ -23,7 +22,8 @@ import com.intland.eurocup.service.date.DateService;
  */
 @Component
 public class DefaultResponseStorage implements ResponseStorage {
-  private static final int REPSONSE_TIMEOUT_MIN = 5;
+  private static final int RESPONSE_TIMEOUT_MIN = 5;
+  private static final int CLEANER_TASK_SCHEDULE = 5 * 60 * 1000;
   private static final Response ERROR_RESPONSE = new Response(ResponseStatus.ERROR, "Request id not found!");
 
   private final Map<Long, Response> responses = new ConcurrentHashMap<>();
@@ -37,7 +37,7 @@ public class DefaultResponseStorage implements ResponseStorage {
    * 
    * @param requestId id to register.
    */
-  public void registerRequestId(final Long requestId) {
+  public void register(final Long requestId) {
     responses.put(requestId, new Response());
   }
 
@@ -60,7 +60,7 @@ public class DefaultResponseStorage implements ResponseStorage {
    * @param id identifies response.
    * @return {@link Response}.
    */
-  public Response getResponse(final Long id) {
+  public Response get(final Long id) {
     final Response response = responses.getOrDefault(id, ERROR_RESPONSE);
     removeResponseOnArrival(id, response);
     return response;
@@ -77,39 +77,27 @@ public class DefaultResponseStorage implements ResponseStorage {
   }
 
   /**
-   * ResponseStorageCleaner is responsible to clean left overs from response
-   * storage.
-   *
+   * Schedule task to clean left overs from response storage.
    */
-  @Service
-  private class RepsonseStorageCleaner {
-    private static final int CLEANER_TASK_SCHEDULE = 5 * 60 * 1000;
-
-    /**
-     * Schedule task to clean left overs from response storage.
-     */
-    @Scheduled(fixedDelay = CLEANER_TASK_SCHEDULE)
-    public void scheduleFixedDelayTask() {
-      cleanOutdatedResponses();
-    }
-
-    private void cleanOutdatedResponses() {
-      final Iterator<Response> iterator = DefaultResponseStorage.this.responses.values().iterator();
-      while (iterator.hasNext()) {
-        removeTimeoutedResponse(iterator);
-      }
-    }
-
-    private void removeTimeoutedResponse(final Iterator<Response> iterator) {
-      final Response response = iterator.next();
-      if (isReponseTimout(response)) {
-        iterator.remove();
-      }
-    }
-
-    private boolean isReponseTimout(Response response) {
-      final DateTime timeoutedDateTime = dateService.getNow().minusMinutes(REPSONSE_TIMEOUT_MIN);
-      return response.getCreatedDate().isBefore(timeoutedDateTime);
+  @Scheduled(fixedDelay = CLEANER_TASK_SCHEDULE)
+  @Override
+  public void clean() {
+    final Iterator<Response> iterator = responses.values().iterator();
+    while (iterator.hasNext()) {
+      removeTimeoutedResponse(iterator);
     }
   }
+
+  private void removeTimeoutedResponse(final Iterator<Response> iterator) {
+    final Response response = iterator.next();
+    if (isReponseTimout(response)) {
+      iterator.remove();
+    }
+  }
+
+  private boolean isReponseTimout(Response response) {
+    final DateTime timeoutedDateTime = dateService.getNow().minusMinutes(RESPONSE_TIMEOUT_MIN);
+    return response.getCreatedDate().isBefore(timeoutedDateTime);
+  }
+
 }
