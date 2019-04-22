@@ -1,4 +1,4 @@
-package com.intland.eurocup.controller.response;
+package com.intland.eurocup.service.response;
 
 import org.springframework.stereotype.Component;
 

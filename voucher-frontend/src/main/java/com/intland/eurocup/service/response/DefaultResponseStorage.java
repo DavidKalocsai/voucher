@@ -1,4 +1,4 @@
-package com.intland.eurocup.controller.response;
+package com.intland.eurocup.service.response;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -90,23 +90,20 @@ public class DefaultResponseStorage implements ResponseStorage {
      */
     @Scheduled(fixedDelay = CLEANER_TASK_SCHEDULE)
     public void scheduleFixedDelayTask() {
-      removeNextOld();
+      cleanOutdatedResponses();
     }
 
-    private void removeNextOld() {
-      final DateTime timeoutedDateTime = dateService.getNow().minusMinutes(REPSONSE_TIMEOUT_MIN);
-      System.out.println("Now: " + dateService.getNow() + " Cleaning: " + DefaultResponseStorage.this.responses + " Timeout:"
-          + timeoutedDateTime);
-      iterate();
-    }
-
-    private void iterate() {
+    private void cleanOutdatedResponses() {
       final Iterator<Response> iterator = DefaultResponseStorage.this.responses.values().iterator();
       while (iterator.hasNext()) {
-        final Response response = iterator.next();
-        if (isReponseTimout(response)) {
-          iterator.remove();
-        }
+        removeTimeoutedResponse(iterator);
+      }
+    }
+
+    private void removeTimeoutedResponse(final Iterator<Response> iterator) {
+      final Response response = iterator.next();
+      if (isReponseTimout(response)) {
+        iterator.remove();
       }
     }
 

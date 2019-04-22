@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.intland.eurocup.common.model.Territory;
+import com.intland.eurocup.controller.model.DefaultModelViewFactory.ModelViewType;
 import com.intland.eurocup.controller.model.ModelViewFactory;
-import com.intland.eurocup.controller.model.ModelViewFactory.ModelViewType;
-import com.intland.eurocup.controller.response.ResponseStorage;
 import com.intland.eurocup.io.SenderService;
 import com.intland.eurocup.model.Voucher;
 import com.intland.eurocup.service.converter.TerritoryConverter;
 import com.intland.eurocup.service.id.RequestIdGenerator;
+import com.intland.eurocup.service.response.ResponseStorage;
 
 import lombok.extern.log4j.Log4j;
 

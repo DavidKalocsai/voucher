@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.intland.eurocup.common.jms.model.MessageFromFrontend;
-import com.intland.eurocup.controller.response.ResponseStorage;
 import com.intland.eurocup.io.SenderService;
 import com.intland.eurocup.io.jms.JmsSender;
 import com.intland.eurocup.model.Voucher;
+import com.intland.eurocup.service.response.ResponseStorage;
 
 /**
  * Adapter between JMS and the application. Converts voucher into outgoing

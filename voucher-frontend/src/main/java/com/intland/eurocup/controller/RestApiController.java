@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.intland.eurocup.controller.response.ResponseStorage;
 import com.intland.eurocup.model.Response;
+import com.intland.eurocup.service.response.ResponseStorage;
 
 import lombok.extern.log4j.Log4j;
 

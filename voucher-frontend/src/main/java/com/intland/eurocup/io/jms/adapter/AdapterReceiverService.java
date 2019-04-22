@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.intland.eurocup.common.jms.model.MessageFromBackend;
-import com.intland.eurocup.controller.response.ResponseStorage;
 import com.intland.eurocup.io.ReceiverService;
+import com.intland.eurocup.service.response.ResponseStorage;
 
 /**
  * Adapter between JMS and the application. Converts incoming message and saves
@@ -16,7 +16,7 @@ import com.intland.eurocup.io.ReceiverService;
 @Profile("default")
 public class AdapterReceiverService implements ReceiverService {
   @Autowired
-  private ResponseStorage responseStorage;  
+  private ResponseStorage responseStorage;
 
   @Autowired
   private MessageConverter messageConverter;

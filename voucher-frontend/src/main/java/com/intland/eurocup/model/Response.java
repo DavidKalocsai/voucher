@@ -1,6 +1,9 @@
 package com.intland.eurocup.model;
 
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.intland.eurocup.service.date.DateService;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,14 +18,15 @@ public class Response {
   private ResponseStatus status;
   private String message;
   private DateTime createdDate;
-
+  
   /**
    * Default constructor to be used, when adding empty response.
+   * 
    */
   public Response() {
     status = ResponseStatus.NO;
     message = "";
-    createdDate = DateTime.now();
+    this.createdDate = DateTime.now();
   }
 
   /**
@@ -34,6 +38,6 @@ public class Response {
   public Response(final ResponseStatus responseStatus, final String message) {
     status = responseStatus;
     this.message = message;
-    createdDate = DateTime.now();
+    this.createdDate = DateTime.now();
   }
 }

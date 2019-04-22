@@ -10,11 +10,11 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.intland.eurocup.common.model.LotResult;
-import com.intland.eurocup.controller.response.ResponseStorage;
 import com.intland.eurocup.io.SenderService;
 import com.intland.eurocup.model.Response;
 import com.intland.eurocup.model.ResponseStatus;
 import com.intland.eurocup.model.Voucher;
+import com.intland.eurocup.service.response.ResponseStorage;
 
 /**
  * Mocked IO Service. It is used to test application without JMS and Back end
