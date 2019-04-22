@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.intland.eurocup.controller.exception.ErrorModelViewFactory.ErrorModelViewType;
+import com.intland.eurocup.controller.exception.DefaultErrorModelViewFactory.ErrorModelViewType;
 import com.intland.eurocup.controller.model.exception.UnsupportedModelViewTypeException;
 import com.intland.eurocup.service.converter.exception.UnkownTerritoryException;
 
