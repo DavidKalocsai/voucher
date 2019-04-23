@@ -10,8 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.intland.eurocup.model.VoucherTest;
-import com.intland.eurocup.service.lot.DrawStrategies;
 import com.intland.eurocup.service.lot.exception.UnsupportedTerritoryException;
+import com.intland.eurocup.service.lot.strategy.DrawStrategies;
+import com.intland.eurocup.service.validation.strategy.TerritoryValidationStrategy;
 
 @RunWith(SpringRunner.class)
 public class TerritoryValidationStrategyTest {

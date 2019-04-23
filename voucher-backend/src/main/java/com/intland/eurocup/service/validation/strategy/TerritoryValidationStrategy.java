@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.intland.eurocup.common.model.Territory;
 import com.intland.eurocup.model.Voucher;
-import com.intland.eurocup.service.lot.DrawStrategies;
 import com.intland.eurocup.service.lot.exception.UnsupportedTerritoryException;
+import com.intland.eurocup.service.lot.strategy.DrawStrategies;
 import com.intland.eurocup.service.lot.strategy.DrawStrategy;
 
 /**

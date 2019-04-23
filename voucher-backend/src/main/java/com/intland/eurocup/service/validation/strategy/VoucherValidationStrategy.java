@@ -16,7 +16,11 @@ import com.intland.eurocup.service.validation.exception.VoucherAlreadyInUseExcep
 @Service
 public class VoucherValidationStrategy implements ValidationStrategy {
   @Autowired
-  private VoucherRepository repository;
+  private VoucherRepository voucherRepository;
+  
+  public VoucherValidationStrategy() {
+    System.out.println("Createing first time");
+  }
 
   @Override
   public void validate(final Voucher voucher) {
@@ -26,7 +30,7 @@ public class VoucherValidationStrategy implements ValidationStrategy {
   }
 
   private boolean isVoucherCodeUsedByOtherVoucher(final Voucher voucher) {
-    final List<Voucher> vouchers = repository.findByCode(voucher.getCode());
+    final List<Voucher> vouchers = voucherRepository.findByCode(voucher.getCode());
     return vouchers.size() > 0;
   }
 }

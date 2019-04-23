@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.intland.eurocup.model.LotStatus;
 import com.intland.eurocup.model.Voucher;
+import com.intland.eurocup.service.lot.strategy.DrawStrategies;
 import com.intland.eurocup.service.persist.PersistentService;
 
 /**

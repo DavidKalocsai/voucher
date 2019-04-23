@@ -1,4 +1,4 @@
-package com.intland.eurocup.service.lot;
+package com.intland.eurocup.service.lot.strategy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.intland.eurocup.common.model.Territory;
 import com.intland.eurocup.model.Voucher;
 import com.intland.eurocup.service.lot.exception.UnsupportedTerritoryException;
-import com.intland.eurocup.service.lot.strategy.DrawStrategy;
 
 /*
  * It is used to access all implemented Draw Strategy.

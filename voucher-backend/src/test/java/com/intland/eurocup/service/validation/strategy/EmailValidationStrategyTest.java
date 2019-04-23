@@ -16,6 +16,7 @@ import com.intland.eurocup.model.Voucher;
 import com.intland.eurocup.model.VoucherTest;
 import com.intland.eurocup.repository.VoucherRepository;
 import com.intland.eurocup.service.validation.exception.EmailAlreadyInUseException;
+import com.intland.eurocup.service.validation.strategy.EmailValidationStrategy;
 
 @RunWith(SpringRunner.class)
 public class EmailValidationStrategyTest {

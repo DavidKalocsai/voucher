@@ -14,7 +14,7 @@ import com.intland.eurocup.service.validation.strategy.ValidationStrategy;
  * {@link Voucher} when validate called uppon.
  */
 @Service
-public class ValidationStrategiesImpl implements ValidationStrategies {
+public class DefaultValidationStrategies implements ValidationStrategies {
   final List<ValidationStrategy> validationStrategies = new ArrayList<>();
 
   /**
@@ -22,7 +22,7 @@ public class ValidationStrategiesImpl implements ValidationStrategies {
    * @param foundValidationStrategies {@link ValidationStrategy}
    */
   @Autowired
-  public ValidationStrategiesImpl(final ValidationStrategy... foundValidationStrategies) {
+  public DefaultValidationStrategies(final ValidationStrategy... foundValidationStrategies) {
     if (foundValidationStrategies != null) {
       for (final ValidationStrategy validationStrategy : foundValidationStrategies) {
         this.validationStrategies.add(validationStrategy);
