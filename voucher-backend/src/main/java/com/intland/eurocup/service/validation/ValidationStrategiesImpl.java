@@ -19,7 +19,7 @@ public class ValidationStrategiesImpl implements ValidationStrategies {
 
   /**
    * Constructor of strategies, collects all {@link ValidationStrategy}s and save them up for later use.
-   * @param foundValidationStrategies
+   * @param foundValidationStrategies {@link ValidationStrategy}
    */
   @Autowired
   public ValidationStrategiesImpl(final ValidationStrategy... foundValidationStrategies) {
