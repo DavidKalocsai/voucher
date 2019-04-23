@@ -1,4 +1,4 @@
-package com.intland.eurocup.jms;
+package com.intland.eurocup.io.jms;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.intland.eurocup.common.jms.model.MessageFromBackend;
 import com.intland.eurocup.common.jms.model.MessageFromFrontend;
-import com.intland.eurocup.jms.adapter.ServiceAdapter;
+import com.intland.eurocup.io.jms.adapter.ServiceAdapter;
 
 /**
  * Implementation to receive messages from JMS and send messages to JMS.

@@ -1,4 +1,4 @@
-package com.intland.eurocup.jms;
+package com.intland.eurocup.io.jms;
 
 import com.intland.eurocup.common.jms.model.MessageFromBackend;
 import com.intland.eurocup.common.jms.model.MessageFromFrontend;
