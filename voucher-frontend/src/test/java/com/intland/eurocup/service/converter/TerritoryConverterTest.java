@@ -34,7 +34,7 @@ public class TerritoryConverterTest {
     //given
 
     //when
-    converter.setAsText(Territory.GER.getDbCode());
+    converter.setAsText(Territory.GER.getCode());
     
     //then
     Assert.assertEquals(Territory.GER, converter.getValue());    

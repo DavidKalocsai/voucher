@@ -9,19 +9,13 @@ import com.intland.eurocup.model.Voucher;
 import com.intland.eurocup.repository.VoucherRepository;
 
 /**
- * Interface to persist {@link Voucher}.
+ *  PersistentService implementation to save and get vouchers to/from DB.
  */
 @Service
 public class DefaultPersistentService implements PersistentService {
 
   @Autowired
   private VoucherRepository repository;
-
-  @Override
-  public Voucher saveIfAbsent(final Voucher voucher) {
-    Voucher retVoucher = get(voucher);
-    return retVoucher != null ? retVoucher : repository.save(voucher);
-  }
 
   @Override
   public Voucher save(final Voucher voucher) {

@@ -17,6 +17,10 @@ import com.intland.eurocup.service.validation.strategy.ValidationStrategy;
 public class ValidationStrategiesImpl implements ValidationStrategies {
   final List<ValidationStrategy> validationStrategies = new ArrayList<>();
 
+  /**
+   * Constructor of strategies, collects all {@link ValidationStrategy}s and save them up for later use.
+   * @param foundValidationStrategies
+   */
   @Autowired
   public ValidationStrategiesImpl(final ValidationStrategy... foundValidationStrategies) {
     if (foundValidationStrategies != null) {

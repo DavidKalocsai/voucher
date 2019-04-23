@@ -9,7 +9,7 @@ import com.intland.eurocup.model.Voucher;
 public interface DrawStrategies {
   /**
    * Sends the voucher to the right strategy (based on {@link Territory} of the
-   * {@link Voucher})
+   * {@link Voucher}).
    * 
    * @param voucher {@link Voucher}
    */

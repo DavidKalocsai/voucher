@@ -29,24 +29,12 @@ public class DefaultRedeemService implements RedeemService {
 
   @Override
   public LotStatus redeem(final Voucher voucher) {
-    final Voucher voucherFromDb = persistantService.get(voucher);
-    validateNewVoucher(voucher, voucherFromDb);
-    final Voucher persistedVoucher = saveNewVoucher(voucher, voucherFromDb);
-    logger.info("Voucher persisted: " + persistedVoucher);
-    return lotService.lot(persistedVoucher);
-  }
-
-  private void validateNewVoucher(final Voucher voucher, final Voucher voucherFromDb) {
-    if (voucherFromDb == null) {
+    Voucher persistedVoucher = persistantService.get(voucher);
+    if (persistedVoucher == null) {
       validationService.validate(voucher);
-    }
-  }
-
-  private Voucher saveNewVoucher(final Voucher voucher, final Voucher voucherFromDb) {
-    Voucher persistedVoucher = voucherFromDb;
-    if (voucherFromDb == null) {
       persistedVoucher = persistantService.save(voucher);
     }
-    return persistedVoucher;
+    logger.info("Voucher persisted: " + persistedVoucher);
+    return lotService.lot(persistedVoucher);
   }
 }

@@ -3,7 +3,7 @@ package com.intland.eurocup.service.persist;
 import com.intland.eurocup.model.Voucher;
 
 /**
- * Interface to persist {@link Voucher}.
+ * Interface to retrieve/persist {@link Voucher} from/to DB.
  */
 public interface PersistentService {
   /**
@@ -13,14 +13,6 @@ public interface PersistentService {
    * @return persisted {@link Voucher}
    */
   Voucher save(Voucher voucher);
-
-  /**
-   * Save voucher only if not yet in DB and retrieve it back to have to full data.
-   * 
-   * @param voucher {@link Voucher} - converted from incoming data
-   * @return {@link Voucher} - retrieved from DB
-   */
-  Voucher saveIfAbsent(Voucher voucher);
   
   /**
    * Fetch {@link Voucher} from DB based on email, territory and code of the voucher.

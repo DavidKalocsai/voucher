@@ -1,22 +1,21 @@
-package com.intland.eurocup.io.jms;
+package com.intland.eurocup.io;
 
 import com.intland.eurocup.common.jms.model.MessageFromBackend;
 import com.intland.eurocup.common.jms.model.MessageFromFrontend;
 
 /**
- * Interface to receive messages from JMS and send messages to JMS.
+ * Interface to receive messages from input and send messages to output.
  */
-public interface JmsService {
+public interface IoService {
   /**
-   * JMS receiver. It will be called on 'message arrived from JMS' event.
+   * Event handler of 'message arrived' event.
    * 
    * @param message - {@link MessageFromBackend}
    */
   void receiveMessage(MessageFromFrontend message);
 
   /**
-   * JMS sender. It will be called after received message (voucher) is saved,
-   * drawn. The result of lot will be sent back to JMS.
+   * Send result to output.
    * 
    * @param message {@link MessageFromBackend}
    */

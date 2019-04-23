@@ -10,17 +10,18 @@ import org.springframework.stereotype.Component;
 
 import com.intland.eurocup.common.jms.model.MessageFromBackend;
 import com.intland.eurocup.common.jms.model.MessageFromFrontend;
-import com.intland.eurocup.io.jms.adapter.ServiceAdapter;
+import com.intland.eurocup.io.IoService;
+import com.intland.eurocup.io.adapter.ServiceAdapter;
 
 /**
  * Implementation to receive messages from JMS and send messages to JMS.
  */
 @Component
-public class DefaultJmsService implements JmsService {
+public class DefaultJmsService implements IoService {
   private Logger logger = LoggerFactory.getLogger(DefaultJmsService.class);
 
   @Value("${jms.queue.to.ui.name}")
-  private String outGoingQueueName;
+  private String outgoingQueueName;
 
   @Autowired
   private JmsTemplate jmsTemplate;
@@ -39,6 +40,6 @@ public class DefaultJmsService implements JmsService {
   @Override
   public void send(final MessageFromBackend message) {
     logger.info("Sent to UI <" + message + ">");
-    jmsTemplate.convertAndSend(outGoingQueueName, message);
+    jmsTemplate.convertAndSend(outgoingQueueName, message);
   }
 }

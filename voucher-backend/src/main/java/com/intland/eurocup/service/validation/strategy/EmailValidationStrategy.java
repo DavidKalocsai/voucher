@@ -17,14 +17,11 @@ import com.intland.eurocup.service.validation.exception.EmailAlreadyInUseExcepti
  */
 @Service
 public class EmailValidationStrategy implements ValidationStrategy {
-  private Logger logger = LoggerFactory.getLogger(EmailValidationStrategy.class);
-
   @Autowired
   private VoucherRepository repository;
 
   @Override
   public void validate(final Voucher voucher) {
-    logger.info("Email validation: " + voucher);
     if (isEmailUsedByOtherVoucher(voucher)) {
       throw new EmailAlreadyInUseException();
     }

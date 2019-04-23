@@ -1,4 +1,4 @@
-package com.intland.eurocup.io.jms.adapter.converter;
+package com.intland.eurocup.io.adapter.converter;
 
 import org.springframework.stereotype.Service;
 

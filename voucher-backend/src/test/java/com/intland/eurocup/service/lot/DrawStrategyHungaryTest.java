@@ -70,15 +70,15 @@ public class DrawStrategyHungaryTest {
 		final Territory territory = Territory.GER;
 		final Voucher voucher = VoucherTestModel.creaeteVoucher(territory, LotStatus.NO_DRAW);
 		voucher.setCreatedAt(date);
-		Mockito.when(voucherRepository.countWinners(territory.getDbCode())).thenReturn(allTimeMax);
+		Mockito.when(voucherRepository.countWinners(territory.getCode())).thenReturn(allTimeMax);
 		
 		// When
 		drawStrategy.draw(voucher);
 				
 		// Then
 		Assert.assertEquals(LotStatus.LOSER, voucher.getLotStatus());
-		Mockito.verify(voucherRepository, Mockito.times(1)).countWinners(Territory.GER.getDbCode());
-		Mockito.verify(voucherRepository, Mockito.times(0)).countWinnersOnDate(voucher.getCreationDate(), Territory.GER.getDbCode());
+		Mockito.verify(voucherRepository, Mockito.times(1)).countWinners(Territory.GER.getCode());
+		Mockito.verify(voucherRepository, Mockito.times(0)).countWinnersOnDate(voucher.getCreationDate(), Territory.GER.getCode());
 	}
 	
 	@Test
@@ -90,16 +90,16 @@ public class DrawStrategyHungaryTest {
 		final Territory territory = Territory.GER;
 		final Voucher voucher = VoucherTestModel.creaeteVoucher(territory, LotStatus.NO_DRAW);
 		voucher.setCreatedAt(date);
-		Mockito.when(voucherRepository.countWinners(territory.getDbCode())).thenReturn(allTimeMax);
-		Mockito.when(voucherRepository.countWinnersOnDate(voucher.getCreationDate(), territory.getDbCode())).thenReturn(dailyMax);
+		Mockito.when(voucherRepository.countWinners(territory.getCode())).thenReturn(allTimeMax);
+		Mockito.when(voucherRepository.countWinnersOnDate(voucher.getCreationDate(), territory.getCode())).thenReturn(dailyMax);
 		
 		// When
 		drawStrategy.draw(voucher);
 				
 		// Then
 		Assert.assertEquals(LotStatus.LOSER, voucher.getLotStatus());
-		Mockito.verify(voucherRepository, Mockito.times(1)).countWinners(Territory.GER.getDbCode());
-		Mockito.verify(voucherRepository, Mockito.times(1)).countWinnersOnDate(voucher.getCreationDate(), Territory.GER.getDbCode());
+		Mockito.verify(voucherRepository, Mockito.times(1)).countWinners(Territory.GER.getCode());
+		Mockito.verify(voucherRepository, Mockito.times(1)).countWinnersOnDate(voucher.getCreationDate(), Territory.GER.getCode());
 	}
 	
 	@Test
@@ -114,18 +114,18 @@ public class DrawStrategyHungaryTest {
 		final Voucher voucher = VoucherTestModel.creaeteVoucher(territory, LotStatus.NO_DRAW);
 		voucher.setCreatedAt(date);
 		voucher.setId(currentId);
-		Mockito.when(voucherRepository.countWinners(territory.getDbCode())).thenReturn(allTimeMax);
-		Mockito.when(voucherRepository.countWinnersOnDate(voucher.getCreationDate(), territory.getDbCode())).thenReturn(dailyMax);
-		Mockito.when(voucherRepository.countVouchersOnDate(voucher.getCreationDate(), currentId, territory.getDbCode())).thenReturn(voucherDailySequence - 1);
+		Mockito.when(voucherRepository.countWinners(territory.getCode())).thenReturn(allTimeMax);
+		Mockito.when(voucherRepository.countWinnersOnDate(voucher.getCreationDate(), territory.getCode())).thenReturn(dailyMax);
+		Mockito.when(voucherRepository.countVouchersOnDate(voucher.getCreationDate(), currentId, territory.getCode())).thenReturn(voucherDailySequence - 1);
 		
 		// When
 		drawStrategy.draw(voucher);
 				
 		// Then
 		Assert.assertEquals(LotStatus.LOSER, voucher.getLotStatus());
-		Mockito.verify(voucherRepository, Mockito.times(1)).countWinners(Territory.GER.getDbCode());
-		Mockito.verify(voucherRepository, Mockito.times(1)).countWinnersOnDate(voucher.getCreationDate(), Territory.GER.getDbCode());
-		Mockito.verify(voucherRepository, Mockito.times(1)).countVouchersOnDate(voucher.getCreationDate(), currentId, Territory.GER.getDbCode());
+		Mockito.verify(voucherRepository, Mockito.times(1)).countWinners(Territory.GER.getCode());
+		Mockito.verify(voucherRepository, Mockito.times(1)).countWinnersOnDate(voucher.getCreationDate(), Territory.GER.getCode());
+		Mockito.verify(voucherRepository, Mockito.times(1)).countVouchersOnDate(voucher.getCreationDate(), currentId, Territory.GER.getCode());
 	}
 	
 	@Test
@@ -140,17 +140,17 @@ public class DrawStrategyHungaryTest {
 		final Voucher voucher = VoucherTestModel.creaeteVoucher(territory, LotStatus.NO_DRAW);
 		voucher.setCreatedAt(date);
 		voucher.setId(currentId);
-		Mockito.when(voucherRepository.countWinners(territory.getDbCode())).thenReturn(allTimeMax);
-		Mockito.when(voucherRepository.countWinnersOnDate(voucher.getCreationDate(), territory.getDbCode())).thenReturn(dailyMax);
-		Mockito.when(voucherRepository.countVouchersOnDate(voucher.getCreationDate(), currentId, territory.getDbCode())).thenReturn(voucherDailySequence);
+		Mockito.when(voucherRepository.countWinners(territory.getCode())).thenReturn(allTimeMax);
+		Mockito.when(voucherRepository.countWinnersOnDate(voucher.getCreationDate(), territory.getCode())).thenReturn(dailyMax);
+		Mockito.when(voucherRepository.countVouchersOnDate(voucher.getCreationDate(), currentId, territory.getCode())).thenReturn(voucherDailySequence);
 		
 		// When
 		drawStrategy.draw(voucher);
 				
 		// Then
 		Assert.assertEquals(LotStatus.WINNER, voucher.getLotStatus());
-		Mockito.verify(voucherRepository, Mockito.times(1)).countWinners(Territory.GER.getDbCode());
-		Mockito.verify(voucherRepository, Mockito.times(1)).countWinnersOnDate(voucher.getCreationDate(), Territory.GER.getDbCode());
-		Mockito.verify(voucherRepository, Mockito.times(1)).countVouchersOnDate(voucher.getCreationDate(), currentId, Territory.GER.getDbCode());
+		Mockito.verify(voucherRepository, Mockito.times(1)).countWinners(Territory.GER.getCode());
+		Mockito.verify(voucherRepository, Mockito.times(1)).countWinnersOnDate(voucher.getCreationDate(), Territory.GER.getCode());
+		Mockito.verify(voucherRepository, Mockito.times(1)).countVouchersOnDate(voucher.getCreationDate(), currentId, Territory.GER.getCode());
 	}
 }

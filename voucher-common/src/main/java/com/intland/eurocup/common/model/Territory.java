@@ -1,6 +1,5 @@
 package com.intland.eurocup.common.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -8,26 +7,27 @@ import lombok.Getter;
  * to deleted, but not removed.
  */
 @Getter
-@AllArgsConstructor
 public enum Territory {
-	HUN("Hungary"), GER("Germany");
+	HUN("HUN", "Hungary"), GER("GER", "Germany");
 
-	private String description;
+  private final String code;
+	private final String description;
 
+	private Territory(final String code, final String description) {
+	  this.code = code;
+	  this.description = description;
+	}
+	
 	public static Territory getEnumFromCode(final String code) {
 		Territory orderStatus = null;
 		for (final Territory o : Territory.values()) {
-			if (orderStatus == null && o.name().equals(code)) {
+			if (orderStatus == null && o.getCode().equals(code)) {
 				orderStatus = o;
 			}
 		}
 		return orderStatus;
 	}
 	
-	public String getDbCode() {
-		return this.name();
-	}
-
 	@Override
 	public String toString() {
 		return this.description;

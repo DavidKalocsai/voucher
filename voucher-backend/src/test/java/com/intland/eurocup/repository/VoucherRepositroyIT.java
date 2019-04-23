@@ -83,7 +83,7 @@ public class VoucherRepositroyIT {
 		setupAllTimeWinner();
 
 		// when
-		final Long winnersInGermany = repository.countWinners(Territory.GER.getDbCode());
+		final Long winnersInGermany = repository.countWinners(Territory.GER.getCode());
 		// then
 		Assert.assertEquals(expectedGermanWinnersCount, winnersInGermany);
 	}
@@ -95,7 +95,7 @@ public class VoucherRepositroyIT {
 		setupAllTimeWinner();
 
 		// when
-		final Long winnersInGermany = repository.countWinnersOnDate(getTodayDate(), Territory.GER.getDbCode());
+		final Long winnersInGermany = repository.countWinnersOnDate(getTodayDate(), Territory.GER.getCode());
 
 		// then
 		Assert.assertEquals(expectedGermanWinnersCountOnDate, winnersInGermany);
@@ -110,7 +110,7 @@ public class VoucherRepositroyIT {
 		// when
 		final Voucher voucher = repository.save(VoucherTestModel.creaeteVoucher(Territory.GER, LotStatus.WINNER));
 		final Long voucherDailySequenceNumber = repository.countVouchersOnDate(voucher.getCreationDate(), voucher.getId(),
-				Territory.GER.getDbCode());
+				Territory.GER.getCode());
 		
 		// then
 		Assert.assertEquals(expectedSequenceNumber, voucherDailySequenceNumber);

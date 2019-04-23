@@ -14,14 +14,20 @@ import com.intland.eurocup.repository.VoucherRepository;
 public abstract class BaseDrawStrategy implements DrawStrategy {
   private Logger logger = LoggerFactory.getLogger(BaseDrawStrategy.class);
 
-  private final int allTimePrizeLimit;
-  private final int dailyPrizeLimit;
+  private final Long allTimePrizeLimit;
+  private final Long dailyPrizeLimit;
   private final Long winningSequence;
 
   @Autowired
   private VoucherRepository voucherRepository;
 
-  public BaseDrawStrategy(final int allTimePrizeLimit, final int dailyPrizeLimit, final Long winningSequence) {
+  /**
+   * Constructor of BaseDrawStartegy. It is used by child to pass values for draw strategy.
+   * @param allTimePrizeLimit total number of prizes. 
+   * @param dailyPrizeLimit total daily number of prizes.
+   * @param winningSequence every voucher added modulo "x"th is winning.
+   */
+  public BaseDrawStrategy(final Long allTimePrizeLimit, final Long dailyPrizeLimit, final Long winningSequence) {
     this.allTimePrizeLimit = allTimePrizeLimit;
     this.dailyPrizeLimit = dailyPrizeLimit;
     this.winningSequence = winningSequence;
@@ -46,17 +52,17 @@ public abstract class BaseDrawStrategy implements DrawStrategy {
   }
 
   private boolean allTimeLimitNotReached(final Voucher voucher) {
-    return voucherRepository.countWinners(voucher.getTerritory().getDbCode()) < allTimePrizeLimit;
+    return voucherRepository.countWinners(voucher.getTerritory().getCode()) < allTimePrizeLimit;
   }
 
   private boolean dailyLimitNotReached(final Voucher voucher) {
     return voucherRepository.countWinnersOnDate(voucher.getCreationDate(),
-        voucher.getTerritory().getDbCode()) < dailyPrizeLimit;
+        voucher.getTerritory().getCode()) < dailyPrizeLimit;
   }
 
   private void proceedWithDraw(final Voucher voucher) {
     final Long voucherDailySequenceNumber = voucherRepository.countVouchersOnDate(voucher.getCreationDate(),
-        voucher.getId(), voucher.getTerritory().getDbCode());
+        voucher.getId(), voucher.getTerritory().getCode());
     if (voucherDailySequenceNumber % winningSequence == 0) {
       voucher.setLotStatus(LotStatus.WINNER);
     }

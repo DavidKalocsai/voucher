@@ -1,4 +1,4 @@
-package com.intland.eurocup.io.jms.adapter;
+package com.intland.eurocup.io.adapter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import com.intland.eurocup.common.jms.model.MessageFromBackend;
 import com.intland.eurocup.common.jms.model.MessageFromFrontend;
 import com.intland.eurocup.common.model.LotResult;
+import com.intland.eurocup.io.adapter.converter.MessageConverters;
 import com.intland.eurocup.io.jms.DefaultJmsService;
-import com.intland.eurocup.io.jms.adapter.converter.MessageConverters;
 import com.intland.eurocup.model.LotStatus;
 import com.intland.eurocup.model.Voucher;
 import com.intland.eurocup.service.RedeemService;

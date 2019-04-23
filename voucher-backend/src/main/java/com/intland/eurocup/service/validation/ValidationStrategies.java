@@ -10,7 +10,7 @@ import com.intland.eurocup.service.validation.strategy.ValidationStrategy;
 public interface ValidationStrategies {
 
   /**
-   * Validate {@link Voucher}
+   * Validate {@link Voucher}.
    * 
    * @param voucher {@link Voucher}
    */
