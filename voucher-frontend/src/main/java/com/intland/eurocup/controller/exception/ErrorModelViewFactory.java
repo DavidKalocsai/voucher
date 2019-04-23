@@ -1,11 +1,8 @@
 package com.intland.eurocup.controller.exception;
 
-import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.intland.eurocup.controller.exception.DefaultErrorModelViewFactory.ErrorModelViewType;
-
-import lombok.extern.log4j.Log4j;
 
 /**
  * Model View Factory to build error views for given issues.

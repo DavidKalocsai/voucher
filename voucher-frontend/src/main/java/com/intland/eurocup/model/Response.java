@@ -1,11 +1,7 @@
 package com.intland.eurocup.model;
 
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.intland.eurocup.service.date.DateService;
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 

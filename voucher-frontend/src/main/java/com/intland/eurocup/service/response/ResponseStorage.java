@@ -1,7 +1,5 @@
 package com.intland.eurocup.service.response;
 
-import org.springframework.stereotype.Component;
-
 import com.intland.eurocup.model.Response;
 
 /**
