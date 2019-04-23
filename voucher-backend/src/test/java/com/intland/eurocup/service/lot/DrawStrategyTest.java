@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.intland.eurocup.common.model.Territory;
 import com.intland.eurocup.model.LotStatus;
 import com.intland.eurocup.model.Voucher;
-import com.intland.eurocup.model.VoucherTestModel;
+import com.intland.eurocup.model.VoucherTest;
 import com.intland.eurocup.repository.VoucherRepository;
 import com.intland.eurocup.service.lot.strategy.BaseDrawStrategy;
 
@@ -67,7 +67,7 @@ public class DrawStrategyTest {
   @Test
   public void drawShouldNotChangeVoucherWhenLotStatusAlreadySet() {
     // Given
-    final Voucher voucher = VoucherTestModel.createVoucher(Territory.GER, LotStatus.WINNER);
+    final Voucher voucher = VoucherTest.createVoucher(Territory.GER, LotStatus.WINNER);
 
     // When
     drawStrategy.draw(voucher);
@@ -80,8 +80,8 @@ public class DrawStrategyTest {
   @Test
   public void drawShouldResultLoserWhenAllTimeLimitReached() {
     // Given
-    final Voucher voucher = VoucherTestModel.createBasicVoucher(LotStatus.NO_DRAW);
-    Mockito.when(voucherRepository.countWinners(VoucherTestModel.TERRITORY.getCode())).thenReturn(ALL_TIME_PRIZE_LIMIT);
+    final Voucher voucher = VoucherTest.createBasicVoucher(LotStatus.NO_DRAW);
+    Mockito.when(voucherRepository.countWinners(VoucherTest.TERRITORY.getCode())).thenReturn(ALL_TIME_PRIZE_LIMIT);
 
     // When
     drawStrategy.draw(voucher);
@@ -95,7 +95,7 @@ public class DrawStrategyTest {
   @Test
   public void drawShouldResultLoserWhenDailyLimitReached() {
     // Given
-    final Voucher voucher = VoucherTestModel.createBasicVoucher(LotStatus.NO_DRAW);
+    final Voucher voucher = VoucherTest.createBasicVoucher(LotStatus.NO_DRAW);
     Mockito.when(voucherRepository.countWinners(voucher.getTerritory().getCode())).thenReturn(ALL_TIME_PRIZE_LIMIT - 1);
     Mockito.when(voucherRepository.countWinnersOnDate(voucher.getCreationDate(), voucher.getTerritory().getCode())).thenReturn(DAILY_PRIZE_LIMIT);
 
@@ -111,7 +111,7 @@ public class DrawStrategyTest {
   @Test
   public void drawShouldResultLoserWhenVoucherSequnceNumberNotWinningSequence() {
     // Given
-    final Voucher voucher = VoucherTestModel.createBasicVoucher(1L, LotStatus.NO_DRAW);
+    final Voucher voucher = VoucherTest.createBasicVoucher(1L, LotStatus.NO_DRAW);
     Mockito.when(voucherRepository.countWinners(voucher.getTerritory().getCode())).thenReturn(ALL_TIME_PRIZE_LIMIT-1);
     Mockito.when(voucherRepository.countWinnersOnDate(voucher.getCreationDate(), voucher.getTerritory().getCode())).thenReturn(DAILY_PRIZE_LIMIT-1);
     Mockito.when(voucherRepository.countVouchersOnDate(voucher.getCreationDate(), voucher.getId(), voucher.getTerritory().getCode()))
@@ -130,7 +130,7 @@ public class DrawStrategyTest {
   @Test
   public void drawShouldResultWinnerWhenVoucherSequnceNumberWinningSequence() {
     // Given
-    final Voucher voucher = VoucherTestModel.createBasicVoucher(1L, LotStatus.NO_DRAW);
+    final Voucher voucher = VoucherTest.createBasicVoucher(1L, LotStatus.NO_DRAW);
     Mockito.when(voucherRepository.countWinners(voucher.getTerritory().getCode())).thenReturn(ALL_TIME_PRIZE_LIMIT-1);
     Mockito.when(voucherRepository.countWinnersOnDate(voucher.getCreationDate(), voucher.getTerritory().getCode())).thenReturn(DAILY_PRIZE_LIMIT-1);
     Mockito.when(voucherRepository.countVouchersOnDate(voucher.getCreationDate(), voucher.getId(), voucher.getTerritory().getCode()))

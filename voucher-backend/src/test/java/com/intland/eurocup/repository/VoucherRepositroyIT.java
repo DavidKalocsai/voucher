@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.intland.eurocup.common.model.Territory;
 import com.intland.eurocup.model.LotStatus;
 import com.intland.eurocup.model.Voucher;
-import com.intland.eurocup.model.VoucherTestModel;
+import com.intland.eurocup.model.VoucherTest;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -34,7 +34,7 @@ public class VoucherRepositroyIT {
 		final Voucher voucher = setupBasicVoucher();
 
 		// when
-		Voucher foundVouhcer = repository.findByEmail(VoucherTestModel.EMAIL).get(0);
+		Voucher foundVouhcer = repository.findByEmail(VoucherTest.EMAIL).get(0);
 
 		// then
 		Assert.assertEquals(voucher.getEmail(), foundVouhcer.getEmail());
@@ -46,7 +46,7 @@ public class VoucherRepositroyIT {
 		final Voucher voucher = setupBasicVoucher();
 
 		// when
-		Voucher foundVouhcer = repository.findByCode(VoucherTestModel.CODE).get(0);
+		Voucher foundVouhcer = repository.findByCode(VoucherTest.CODE).get(0);
 
 		// then
 		Assert.assertEquals(voucher.getEmail(), foundVouhcer.getEmail());
@@ -58,8 +58,8 @@ public class VoucherRepositroyIT {
 		final Voucher voucher = setupBasicVoucher();
 
 		// when
-		Voucher foundVouhcer = repository.findByEmailAndCodeAndTerritory(VoucherTestModel.EMAIL, VoucherTestModel.CODE,
-				VoucherTestModel.TERRITORY).get(0);
+		Voucher foundVouhcer = repository.findByEmailAndCodeAndTerritory(VoucherTest.EMAIL, VoucherTest.CODE,
+				VoucherTest.TERRITORY).get(0);
 		// then
 		Assert.assertEquals(voucher.getEmail(), foundVouhcer.getEmail());
 	}
@@ -108,7 +108,7 @@ public class VoucherRepositroyIT {
 		setupAllTimeWinner();
 
 		// when
-		final Voucher voucher = repository.save(VoucherTestModel.createVoucher(Territory.GER, LotStatus.WINNER));
+		final Voucher voucher = repository.save(VoucherTest.createVoucher(Territory.GER, LotStatus.WINNER));
 		final Long voucherDailySequenceNumber = repository.countVouchersOnDate(voucher.getCreationDate(), voucher.getId(),
 				Territory.GER.getCode());
 		
@@ -117,16 +117,16 @@ public class VoucherRepositroyIT {
 	}
 
 	private Voucher setupBasicVoucher() {
-		final Voucher voucher = VoucherTestModel.createBasicVoucher();
+		final Voucher voucher = VoucherTest.createBasicVoucher();
 		return repository.save(voucher);
 	}
 
 	private void setupAllTimeWinner() {
-		repository.save(VoucherTestModel.createVoucher(Territory.GER, LotStatus.WINNER));
-		repository.save(VoucherTestModel.createVoucher(Territory.HUN, LotStatus.LOSER));
-		repository.save(VoucherTestModel.createVoucher(Territory.GER, LotStatus.WINNER));
-		repository.save(VoucherTestModel.createVoucher(Territory.HUN, LotStatus.WINNER));
-		repository.save(VoucherTestModel.createVoucher(Territory.GER, LotStatus.LOSER));
+		repository.save(VoucherTest.createVoucher(Territory.GER, LotStatus.WINNER));
+		repository.save(VoucherTest.createVoucher(Territory.HUN, LotStatus.LOSER));
+		repository.save(VoucherTest.createVoucher(Territory.GER, LotStatus.WINNER));
+		repository.save(VoucherTest.createVoucher(Territory.HUN, LotStatus.WINNER));
+		repository.save(VoucherTest.createVoucher(Territory.GER, LotStatus.LOSER));
 	}
 
 	private String getTodayDate() {

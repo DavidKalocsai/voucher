@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.intland.eurocup.model.Voucher;
-import com.intland.eurocup.model.VoucherTestModel;
+import com.intland.eurocup.model.VoucherTest;
 import com.intland.eurocup.repository.VoucherRepository;
 import com.intland.eurocup.service.validation.exception.VoucherAlreadyInUseException;
 
@@ -37,10 +37,10 @@ public class VoucherValidationStrategyTest {
   @Test
   public void validateShouldReturnSuccessfullyWhenVoucherNotInUse() {
     // Given
-    Mockito.when(voucherRepository.findByCode(VoucherTestModel.CODE)).thenReturn(new ArrayList<Voucher>());
+    Mockito.when(voucherRepository.findByCode(VoucherTest.CODE)).thenReturn(new ArrayList<Voucher>());
 
     // When
-    voucherValidator.validate(VoucherTestModel.createBasicVoucher());
+    voucherValidator.validate(VoucherTest.createBasicVoucher());
 
     // Then
   }
@@ -48,18 +48,18 @@ public class VoucherValidationStrategyTest {
   @Test(expected=VoucherAlreadyInUseException.class)
   public void validateShouldThrowExceptionWhenVoucherInUse() {
     // Given
-    Mockito.when(voucherRepository.findByCode(VoucherTestModel.CODE)).thenReturn(createArrayListWithVouchers());
+    Mockito.when(voucherRepository.findByCode(VoucherTest.CODE)).thenReturn(createArrayListWithVouchers());
 
     // When
-    voucherValidator.validate(VoucherTestModel.createBasicVoucher());
+    voucherValidator.validate(VoucherTest.createBasicVoucher());
 
     // Then
   }
   
   private List<Voucher> createArrayListWithVouchers() {
     final List<Voucher> vouchers = new ArrayList<>();
-    vouchers.add(VoucherTestModel.createBasicVoucher());
-    vouchers.add(VoucherTestModel.createBasicVoucher());
+    vouchers.add(VoucherTest.createBasicVoucher());
+    vouchers.add(VoucherTest.createBasicVoucher());
     return vouchers;    
   }
 

@@ -6,7 +6,7 @@ import java.util.Random;
 
 import com.intland.eurocup.common.model.Territory;
 
-public class VoucherTestModel {
+public class VoucherTest {
 	public static final String EMAIL = "a@email.com";
 	public static final String CODE = "1234567890";
 	public static final Territory TERRITORY = Territory.GER;

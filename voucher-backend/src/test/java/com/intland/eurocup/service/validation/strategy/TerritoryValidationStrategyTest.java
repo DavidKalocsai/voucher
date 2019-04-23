@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.intland.eurocup.model.VoucherTestModel;
+import com.intland.eurocup.model.VoucherTest;
 import com.intland.eurocup.service.lot.DrawStrategies;
 import com.intland.eurocup.service.lot.exception.UnsupportedTerritoryException;
 
@@ -33,10 +33,10 @@ public class TerritoryValidationStrategyTest {
   @Test
   public void validateShouldPassWhenStrategyExistForTerritory() {
     // Given
-    Mockito.when(drawStrategies.isStrategyExist(VoucherTestModel.TERRITORY)).thenReturn(true);
+    Mockito.when(drawStrategies.isStrategyExist(VoucherTest.TERRITORY)).thenReturn(true);
 
     // When
-    territoryValidator.validate(VoucherTestModel.createBasicVoucher());
+    territoryValidator.validate(VoucherTest.createBasicVoucher());
 
     // Then
   }
@@ -44,10 +44,10 @@ public class TerritoryValidationStrategyTest {
   @Test(expected=UnsupportedTerritoryException.class)
   public void validateShouldThrowExceptionWhenNoStrategyExistForTerritory() {
     // Given
-    Mockito.when(drawStrategies.isStrategyExist(VoucherTestModel.TERRITORY)).thenReturn(false);
+    Mockito.when(drawStrategies.isStrategyExist(VoucherTest.TERRITORY)).thenReturn(false);
 
     // When
-    territoryValidator.validate(VoucherTestModel.createBasicVoucher());
+    territoryValidator.validate(VoucherTest.createBasicVoucher());
 
     // Then
   }
