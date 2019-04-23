@@ -21,43 +21,43 @@ import com.intland.eurocup.service.validation.ValidationStrategies;
 /**
  * Redeem voucher: validate, persist and after lot, return result.
  */
-@RunWith(SpringRunner.class)
-public class DefaultRedeemServiceTest {
-  private static final Voucher INCOMING_VOUCHER = VoucherTest.createBasicVoucher();
-  private static final Voucher PREVIOUSLY_SAVED_VOUCHER = VoucherTest.createBasicVoucher();
-  private static final Voucher NEWLY_PERSISTED_VOUCHER = VoucherTest.createBasicVoucher();
-  private static final LotStatus LOT_STATUS_PERSISTED = LotStatus.WINNER;
-  private static final LotStatus LOT_STATUS_NEW = LotStatus.LOSER;
+  @RunWith(SpringRunner.class)
+  public class DefaultRedeemServiceTest {
+    private static final Voucher INCOMING_VOUCHER = VoucherTest.createBasicVoucher();
+    private static final Voucher PREVIOUSLY_SAVED_VOUCHER = VoucherTest.createBasicVoucher();
+    private static final Voucher NEWLY_PERSISTED_VOUCHER = VoucherTest.createBasicVoucher();
+    private static final LotStatus LOT_STATUS_PERSISTED = LotStatus.WINNER;
+    private static final LotStatus LOT_STATUS_NEW = LotStatus.LOSER;
+    
+    @TestConfiguration
+    static class DefaultRedeemServiceTestContext {
+      @Bean
+      public DefaultRedeemService redeemSevice() {
+        return new DefaultRedeemService();
+      }
+    }  
+    
+    
+    @Autowired
+    private DefaultRedeemService redeemService;
+    
+    @MockBean
+    private PersistentService persistantService;
   
-  @TestConfiguration
-  static class DefaultRedeemServiceTestContext {
-    @Bean
-    public DefaultRedeemService redeemSevice() {
-      return new DefaultRedeemService();
+    @MockBean
+    private ValidationStrategies validationService;
+  
+    @MockBean
+    private LotService lotService;
+    
+    @Before
+    public void setUp() {
+      
+      
     }
-  }  
-  
-  
-  @Autowired
-  private DefaultRedeemService redeemService;
-  
-  @MockBean
-  private PersistentService persistantService;
-
-  @MockBean
-  private ValidationStrategies validationService;
-
-  @MockBean
-  private LotService lotService;
-  
-  @Before
-  public void setUp() {
     
     
-  }
-  
-  
-  @Test
+    @Test
   public void redeemShouldSkipValidateAndPersistIfVoucherAlreadyPresisted() {
     // Given
     Mockito.when(persistantService.get(INCOMING_VOUCHER)).thenReturn(PREVIOUSLY_SAVED_VOUCHER);
