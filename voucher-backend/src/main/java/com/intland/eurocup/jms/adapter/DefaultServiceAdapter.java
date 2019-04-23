@@ -18,43 +18,44 @@ import com.intland.eurocup.service.validation.exception.EmailAlreadyInUseExcepti
 import com.intland.eurocup.service.validation.exception.VoucherAlreadyInUseException;
 
 /**
- * Default implementation of adapter used between message handler and back-end code.
+ * Default implementation of adapter used between message handler and back-end
+ * code.
  */
 @Service
 public class DefaultServiceAdapter implements ServiceAdapter {
-	private Logger logger = LoggerFactory.getLogger(DefaultJmsService.class);
-	
-	@Autowired
-	private RedeemService redeemService;
-	
-	@Autowired
-	private MessageConverters jmsModelConverter;
+  private Logger logger = LoggerFactory.getLogger(DefaultJmsService.class);
 
-	@Override
-	public MessageFromBackend redeem(final MessageFromFrontend incomingMessage) {
-		final Voucher voucher = jmsModelConverter.convert(incomingMessage);
-		final LotResult lotResult =  redeemVoucher(voucher);
-		return jmsModelConverter.convert(incomingMessage.getRequestId(), lotResult);
-	}
-	
-	private LotResult redeemVoucher(final Voucher voucher) {
-		LotResult lotResult = LotResult.DEFAULT;
-		try {
-			final LotStatus lotStatus =  redeemService.redeem(voucher);
-			lotResult = jmsModelConverter.convert(lotStatus);
-		} catch (final EmailAlreadyInUseException e) {
-			logger.warn("EmailAlreadyInUseException: " + voucher);
-			lotResult = LotResult.EMAIL_USED;
-		} catch (final VoucherAlreadyInUseException e) {
-			logger.warn("VoucherAlreadyInUseException: " + voucher);
-			lotResult = LotResult.VOUCHER_USED;
-		} catch (final UnsupportedTerritoryException e) {
-			logger.warn("UnsupportedTerritoryException: " + voucher);
-			lotResult = LotResult.TERRITORY_NOT_SUPPORTED;
-		} catch (final Exception e) {
-			logger.error("Backend exception: " + voucher);
-			lotResult = LotResult.ERROR;
-		}
-		return lotResult;
-	}
+  @Autowired
+  private RedeemService redeemService;
+
+  @Autowired
+  private MessageConverters jmsModelConverter;
+
+  @Override
+  public MessageFromBackend redeem(final MessageFromFrontend incomingMessage) {
+    final Voucher voucher = jmsModelConverter.convert(incomingMessage);
+    final LotResult lotResult = redeemVoucher(voucher);
+    return jmsModelConverter.convert(incomingMessage.getRequestId(), lotResult);
+  }
+
+  private LotResult redeemVoucher(final Voucher voucher) {
+    LotResult lotResult = LotResult.DEFAULT;
+    try {
+      final LotStatus lotStatus = redeemService.redeem(voucher);
+      lotResult = jmsModelConverter.convert(lotStatus);
+    } catch (final EmailAlreadyInUseException exception) {
+      logger.warn("EmailAlreadyInUseException: " + voucher);
+      lotResult = LotResult.EMAIL_USED;
+    } catch (final VoucherAlreadyInUseException exception) {
+      logger.warn("VoucherAlreadyInUseException: " + voucher);
+      lotResult = LotResult.VOUCHER_USED;
+    } catch (final UnsupportedTerritoryException exception) {
+      logger.warn("UnsupportedTerritoryException: " + voucher);
+      lotResult = LotResult.TERRITORY_NOT_SUPPORTED;
+    } catch (final Exception exception) {
+      logger.error("Backend exception: " + voucher);
+      lotResult = LotResult.ERROR;
+    }
+    return lotResult;
+  }
 }

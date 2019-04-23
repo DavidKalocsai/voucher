@@ -12,25 +12,26 @@ import com.intland.eurocup.repository.VoucherRepository;
 import com.intland.eurocup.service.validation.exception.EmailAlreadyInUseException;
 
 /**
- * Validates Email. Checks if it is previously used. (Validation only runs if voucher is not found previously in DB).  
+ * Validates Email. Checks if it is previously used. (Validation only runs if
+ * voucher is not found previously in DB).
  */
 @Service
 public class EmailValidationStrategy implements ValidationStrategy {
-	private Logger logger = LoggerFactory.getLogger(EmailValidationStrategy.class);
+  private Logger logger = LoggerFactory.getLogger(EmailValidationStrategy.class);
 
-	@Autowired
-	private VoucherRepository repository;
+  @Autowired
+  private VoucherRepository repository;
 
-	@Override
-	public void validate(final Voucher voucher) {
-		logger.info("Email validation: " + voucher);
-		if (isEmailUsedByOtherVoucher(voucher)) {
-			throw new EmailAlreadyInUseException();
-		}
-	}
+  @Override
+  public void validate(final Voucher voucher) {
+    logger.info("Email validation: " + voucher);
+    if (isEmailUsedByOtherVoucher(voucher)) {
+      throw new EmailAlreadyInUseException();
+    }
+  }
 
-	private boolean isEmailUsedByOtherVoucher(final Voucher voucher) {
-		final List<Voucher> vouchers = repository.findByEmail(voucher.getEmail());
-		return vouchers.size() > 0;
-	}
+  private boolean isEmailUsedByOtherVoucher(final Voucher voucher) {
+    final List<Voucher> vouchers = repository.findByEmail(voucher.getEmail());
+    return vouchers.size() > 0;
+  }
 }

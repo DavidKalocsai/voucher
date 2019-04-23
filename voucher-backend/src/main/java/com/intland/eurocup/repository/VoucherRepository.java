@@ -15,18 +15,18 @@ import com.intland.eurocup.model.Voucher;
  */
 @Repository
 public interface VoucherRepository extends JpaRepository<Voucher, Long> {
-	List<Voucher> findByEmail(String email);
+  List<Voucher> findByEmail(String email);
 
-	List<Voucher> findByCode(String code);
+  List<Voucher> findByCode(String code);
 
-	List<Voucher> findByEmailAndCodeAndTerritory(String email, String code, Territory territory);
+  List<Voucher> findByEmailAndCodeAndTerritory(String email, String code, Territory territory);
 
-	@Query(value = "SELECT COUNT(id) FROM Voucher v WHERE v.lot_status = 'WINNER' AND v.territory = :territory", nativeQuery = true)
-	Long countWinners(@Param("territory") String territory);
-	
-	@Query(value = "SELECT COUNT(id) FROM Voucher v WHERE v.lot_status = 'WINNER' AND v.created = :creationDate AND v.territory = :territory", nativeQuery = true)
-    Long countWinnersOnDate(@Param("creationDate") String creationDate, @Param("territory") String territory);
+  @Query(value = "SELECT COUNT(id) FROM Voucher v WHERE v.lot_status = 'WINNER' AND v.territory = :territory", nativeQuery = true)
+  Long countWinners(@Param("territory") String territory);
 
-	@Query(value = "SELECT COUNT(id) FROM Voucher v WHERE v.created = :creationDate AND v.id <= :currentId AND v.territory = :territory", nativeQuery = true)
-	Long countVouchersOnDate(@Param("creationDate") String created, @Param("currentId") Long currentId, @Param("territory") String territory);
+  @Query(value = "SELECT COUNT(id) FROM Voucher v WHERE v.lot_status = 'WINNER' AND v.created = :creationDate AND v.territory = :territory", nativeQuery = true)
+  Long countWinnersOnDate(@Param("creationDate") String creationDate, @Param("territory") String territory);
+
+  @Query(value = "SELECT COUNT(id) FROM Voucher v WHERE v.created = :creationDate AND v.id <= :currentId AND v.territory = :territory", nativeQuery = true)
+  Long countVouchersOnDate(@Param("creationDate") String created, @Param("currentId") Long currentId, @Param("territory") String territory);
 }

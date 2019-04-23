@@ -8,20 +8,21 @@ import com.intland.eurocup.model.Voucher;
 import com.intland.eurocup.service.persist.PersistentService;
 
 /**
- * Interface to draw voucher using DrawStrategies, update voucher with result, save it to DB, return result of lot.
+ * Interface to draw voucher using DrawStrategies, update voucher with result,
+ * save it to DB, return result of lot.
  */
 @Service
 public class DefaultLotService implements LotService {
-	@Autowired
-	private DrawStrategies drawStrategies;
+  @Autowired
+  private DrawStrategies drawStrategies;
 
-	@Autowired
-	private PersistentService persistentService;
+  @Autowired
+  private PersistentService persistentService;
 
-	@Override
-	public LotStatus lot(final Voucher voucher) {
-		drawStrategies.draw(voucher);
-		Voucher persistedVoucher = persistentService.save(voucher);
-		return persistedVoucher.getLotStatus();
-	}
+  @Override
+  public LotStatus lot(final Voucher voucher) {
+    drawStrategies.draw(voucher);
+    Voucher persistedVoucher = persistentService.save(voucher);
+    return persistedVoucher.getLotStatus();
+  }
 }

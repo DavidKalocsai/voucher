@@ -6,6 +6,6 @@ import com.intland.eurocup.model.Voucher;
 
 @Service
 public interface ValidationStrategy {
-	
-	void validate(final Voucher voucher);
+
+  void validate(final Voucher voucher);
 }

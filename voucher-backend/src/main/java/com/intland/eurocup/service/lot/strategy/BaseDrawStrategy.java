@@ -12,58 +12,59 @@ import com.intland.eurocup.repository.VoucherRepository;
  * Base Draw strategy.
  */
 public abstract class BaseDrawStrategy implements DrawStrategy {
-	private Logger logger = LoggerFactory.getLogger(BaseDrawStrategy.class);
-	
-	private final int allTimePrizeLimit;
-	private final int dailyPrizeLimit;
-	private final Long winningSequence;
+  private Logger logger = LoggerFactory.getLogger(BaseDrawStrategy.class);
 
-	@Autowired
-	private VoucherRepository voucherRepository;
-	
-	public BaseDrawStrategy(final int allTimePrizeLimit, final int dailyPrizeLimit, final Long winningSequence) {
-		this.allTimePrizeLimit = allTimePrizeLimit;
-		this.dailyPrizeLimit = dailyPrizeLimit;
-		this.winningSequence = winningSequence;
-	}
+  private final int allTimePrizeLimit;
+  private final int dailyPrizeLimit;
+  private final Long winningSequence;
 
-	@Override
-	public void draw(final Voucher voucher) {
-		logger.info("Before draw! Voucher: " + voucher);
-		if (isDrawRequired(voucher)) {
-			proceedWithDraw(voucher);
-		}
-		setAsLoserIfLotStatusNotSet(voucher);
-		logger.info("After draw! Voucher: " + voucher);
-	}
+  @Autowired
+  private VoucherRepository voucherRepository;
 
-	private boolean isDrawRequired(final Voucher voucher) {
-		return voucherNotYetDrawn(voucher) && allTimeLimitNotReached(voucher)
-				&& dailyLimitNotReached(voucher);
-	}
+  public BaseDrawStrategy(final int allTimePrizeLimit, final int dailyPrizeLimit, final Long winningSequence) {
+    this.allTimePrizeLimit = allTimePrizeLimit;
+    this.dailyPrizeLimit = dailyPrizeLimit;
+    this.winningSequence = winningSequence;
+  }
 
-	private boolean voucherNotYetDrawn(final Voucher voucher) {
-		return voucher.getLotStatus() == LotStatus.NO_DRAW;
-	}
+  @Override
+  public void draw(final Voucher voucher) {
+    logger.info("Before draw! Voucher: " + voucher);
+    if (isDrawRequired(voucher)) {
+      proceedWithDraw(voucher);
+    }
+    setAsLoserIfLotStatusNotSet(voucher);
+    logger.info("After draw! Voucher: " + voucher);
+  }
 
-	private boolean allTimeLimitNotReached(final Voucher voucher) {
-		return voucherRepository.countWinners(voucher.getTerritory().getDbCode()) < allTimePrizeLimit;
-	}
+  private boolean isDrawRequired(final Voucher voucher) {
+    return voucherNotYetDrawn(voucher) && allTimeLimitNotReached(voucher) && dailyLimitNotReached(voucher);
+  }
 
-	private boolean dailyLimitNotReached(final Voucher voucher) {
-		return voucherRepository.countWinnersOnDate(voucher.getCreationDate(), voucher.getTerritory().getDbCode()) < dailyPrizeLimit;
-	}
-	
-	private void proceedWithDraw(final Voucher voucher) {
-		final Long voucherDailySequenceNumber = voucherRepository.countVouchersOnDate(voucher.getCreationDate(), voucher.getId(), voucher.getTerritory().getDbCode());
-		if (voucherDailySequenceNumber % winningSequence == 0) {
-			voucher.setLotStatus(LotStatus.WINNER);
-		}
-	}	
-	
-	private void setAsLoserIfLotStatusNotSet(final Voucher voucher) {
-		if (voucher != null && voucherNotYetDrawn(voucher)) {
-			voucher.setLotStatus(LotStatus.LOSER);
-		}
-	}
+  private boolean voucherNotYetDrawn(final Voucher voucher) {
+    return voucher.getLotStatus() == LotStatus.NO_DRAW;
+  }
+
+  private boolean allTimeLimitNotReached(final Voucher voucher) {
+    return voucherRepository.countWinners(voucher.getTerritory().getDbCode()) < allTimePrizeLimit;
+  }
+
+  private boolean dailyLimitNotReached(final Voucher voucher) {
+    return voucherRepository.countWinnersOnDate(voucher.getCreationDate(),
+        voucher.getTerritory().getDbCode()) < dailyPrizeLimit;
+  }
+
+  private void proceedWithDraw(final Voucher voucher) {
+    final Long voucherDailySequenceNumber = voucherRepository.countVouchersOnDate(voucher.getCreationDate(),
+        voucher.getId(), voucher.getTerritory().getDbCode());
+    if (voucherDailySequenceNumber % winningSequence == 0) {
+      voucher.setLotStatus(LotStatus.WINNER);
+    }
+  }
+
+  private void setAsLoserIfLotStatusNotSet(final Voucher voucher) {
+    if (voucher != null && voucherNotYetDrawn(voucher)) {
+      voucher.setLotStatus(LotStatus.LOSER);
+    }
+  }
 }

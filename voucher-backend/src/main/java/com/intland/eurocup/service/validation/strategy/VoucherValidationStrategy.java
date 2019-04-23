@@ -12,25 +12,26 @@ import com.intland.eurocup.repository.VoucherRepository;
 import com.intland.eurocup.service.validation.exception.VoucherAlreadyInUseException;
 
 /**
- * Validates voucher code. Checks if it is previously used. (Validation only runs if voucher is not found previously in DB).  
+ * Validates voucher code. Checks if it is previously used. (Validation only
+ * runs if voucher is not found previously in DB).
  */
 @Service
-public class VoucherValidationStrategy  implements ValidationStrategy {
-	private Logger logger = LoggerFactory.getLogger(VoucherValidationStrategy.class);
-	
-	@Autowired
-	private VoucherRepository repository;
-	
-	@Override
-	public void validate(final Voucher voucher) {
-		logger.info("Voucher code validation: " + voucher);
-		if ( isVoucherCodeUsedByOtherVoucher(voucher) ) {
-			throw new VoucherAlreadyInUseException();
-		}
-	}
+public class VoucherValidationStrategy implements ValidationStrategy {
+  private Logger logger = LoggerFactory.getLogger(VoucherValidationStrategy.class);
 
-	private boolean isVoucherCodeUsedByOtherVoucher(final Voucher voucher) {
-		final List<Voucher> vouchers =  repository.findByCode(voucher.getCode());
-		return vouchers.size() > 0;
-	}
+  @Autowired
+  private VoucherRepository repository;
+
+  @Override
+  public void validate(final Voucher voucher) {
+    logger.info("Voucher code validation: " + voucher);
+    if (isVoucherCodeUsedByOtherVoucher(voucher)) {
+      throw new VoucherAlreadyInUseException();
+    }
+  }
+
+  private boolean isVoucherCodeUsedByOtherVoucher(final Voucher voucher) {
+    final List<Voucher> vouchers = repository.findByCode(voucher.getCode());
+    return vouchers.size() > 0;
+  }
 }

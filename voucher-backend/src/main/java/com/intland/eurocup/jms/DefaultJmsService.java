@@ -17,28 +17,28 @@ import com.intland.eurocup.jms.adapter.ServiceAdapter;
  */
 @Component
 public class DefaultJmsService implements JmsService {
-	private Logger logger = LoggerFactory.getLogger(DefaultJmsService.class);
-	
-	@Value("${jms.queue.to.ui.name}")
-	private String outGoingQueueName;
-	
-	@Autowired
-	private JmsTemplate jmsTemplate;
-	
-	@Autowired
-	private ServiceAdapter redeemService;
-	
-	@Override
-	@JmsListener(destination = "${jms.queue.from.ui.name}")
-    public void receiveMessage(final MessageFromFrontend message) {
-        logger.info("Received from UI <" + message + ">");
-        final MessageFromBackend backendMesage = redeemService.redeem(message);
-        send(backendMesage);
-    }
-	
-	@Override
-	public void send(final MessageFromBackend message) {
-		logger.info("Sent to UI <" + message + ">");
-		jmsTemplate.convertAndSend(outGoingQueueName, message);
-	}
+  private Logger logger = LoggerFactory.getLogger(DefaultJmsService.class);
+
+  @Value("${jms.queue.to.ui.name}")
+  private String outGoingQueueName;
+
+  @Autowired
+  private JmsTemplate jmsTemplate;
+
+  @Autowired
+  private ServiceAdapter redeemService;
+
+  @Override
+  @JmsListener(destination = "${jms.queue.from.ui.name}")
+  public void receiveMessage(final MessageFromFrontend message) {
+    logger.info("Received from UI <" + message + ">");
+    final MessageFromBackend backendMesage = redeemService.redeem(message);
+    send(backendMesage);
+  }
+
+  @Override
+  public void send(final MessageFromBackend message) {
+    logger.info("Sent to UI <" + message + ">");
+    jmsTemplate.convertAndSend(outGoingQueueName, message);
+  }
 }

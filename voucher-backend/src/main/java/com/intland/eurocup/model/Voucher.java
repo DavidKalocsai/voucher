@@ -34,38 +34,40 @@ import lombok.ToString;
 @Entity
 @Table(name = "voucher")
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = {"createdAt"}, allowGetters = true)
-@Getter @Setter @ToString
+@JsonIgnoreProperties(value = { "createdAt" }, allowGetters = true)
+@Getter
+@Setter
+@ToString
 public class Voucher {
-	@Transient
-	final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Transient
+  final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    @NotBlank
-    @Column(unique = true)
-    private String code;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @NotBlank
-    @Column(unique = true)
-    private String email;
-    
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Territory territory;
-    
-    @Column(name = "created", nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
-    private Date createdAt;
-    
-    @Column(name = "lot_status", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private LotStatus lotStatus;
-    
-    public String getCreationDate() {
-    	return dateFormat.format(createdAt);  
-    }
+  @NotBlank
+  @Column(unique = true)
+  private String code;
+
+  @NotBlank
+  @Column(unique = true)
+  private String email;
+
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  private Territory territory;
+
+  @Column(name = "created", nullable = false, updatable = false)
+  @Temporal(TemporalType.TIMESTAMP)
+  @CreatedDate
+  private Date createdAt;
+
+  @Column(name = "lot_status", nullable = false)
+  @Enumerated(EnumType.STRING)
+  private LotStatus lotStatus;
+
+  public String getCreationDate() {
+    return dateFormat.format(createdAt);
+  }
 }

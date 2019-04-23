@@ -11,25 +11,28 @@ import com.intland.eurocup.model.Voucher;
  */
 public interface MessageConverters {
 
-	/**
-	 * Convert incoming message to voucher.
-	 * @param message {@link MessageFromFrontend}
-	 * @return {@link Voucher}
-	 */
-	Voucher convert(MessageFromFrontend message);
+  /**
+   * Convert incoming message to voucher.
+   * 
+   * @param message {@link MessageFromFrontend}
+   * @return {@link Voucher}
+   */
+  Voucher convert(MessageFromFrontend message);
 
-	/**
-	 * Convert result of voucher redeem to outgoing message.
-	 * @param requestId - id to identify request.
-	 * @param lotResult - {@link LotResult}.
-	 * @return {@link MessageFromBackend}s
-	 */
-	MessageFromBackend convert(Long requestId, LotResult lotResult);
+  /**
+   * Convert result of voucher redeem to outgoing message.
+   * 
+   * @param requestId - id to identify request.
+   * @param lotResult - {@link LotResult}.
+   * @return {@link MessageFromBackend}s
+   */
+  MessageFromBackend convert(Long requestId, LotResult lotResult);
 
-	/**
-	 * Convert result of voucher redeem from back end model to common model. 
-	 * @param lotStatus {@link LotStatus}
-	 * @return {@link LotResult}
-	 */
-	LotResult convert(LotStatus lotStatus);
+  /**
+   * Convert result of voucher redeem from back end model to common model.
+   * 
+   * @param lotStatus {@link LotStatus}
+   * @return {@link LotResult}
+   */
+  LotResult convert(LotStatus lotStatus);
 }

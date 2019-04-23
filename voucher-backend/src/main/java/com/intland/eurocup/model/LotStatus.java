@@ -15,6 +15,11 @@ public enum LotStatus {
 
   private String code;
 
+  /**
+   * Get enum from enum's code. 
+   * @param code code of the enum.
+   * @return enum or null.
+   */
   public static LotStatus getEnumFromCode(final String code) {
     LotStatus orderStatus = null;
     for (final LotStatus o : LotStatus.values()) {
