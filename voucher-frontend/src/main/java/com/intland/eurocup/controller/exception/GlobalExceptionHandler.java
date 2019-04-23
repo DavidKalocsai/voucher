@@ -27,40 +27,40 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   /**
    * Handler for {@link UnkownTerritoryException}.
    * 
-   * @param e exception stack to be logged
+   * @param exception exception stack to be logged
    * @return Specific ModelAndView for the exception.
    */
   @ExceptionHandler(value = UnkownTerritoryException.class)
-  public ModelAndView unknownTerritoryHandler(final Exception e) {
-    logException(e);
+  public ModelAndView unknownTerritoryHandler(final Exception exception) {
+    logException(exception);
     return modelViewFactory.getModelView(ErrorModelViewType.UNKNOWN_TERRITORY);
   }
 
   /**
    * Handler for {@link UnsupportedModelViewTypeException}.
    * 
-   * @param e exception stack to be logged
+   * @param exception exception stack to be logged
    * @return Specific ModelAndView for the exception.
    */
   @ExceptionHandler(value = UnsupportedModelViewTypeException.class)
-  public ModelAndView unsupportedModelViewTypeHandler(final Exception e) {
-    logException(e);
+  public ModelAndView unsupportedModelViewTypeHandler(final Exception exception) {
+    logException(exception);
     return modelViewFactory.getModelView(ErrorModelViewType.UNSUPPORTED_VIEW);
   }
 
   /**
    * Handler for {@link Throwable}.
    * 
-   * @param e exception stack to be logged
+   * @param exception exception stack to be logged
    * @return Specific ModelAndView for the exception.
    */
   @ExceptionHandler(value = Throwable.class)
-  public ModelAndView defaultThrowableHandler(final Exception e) throws Exception {
-    logException(e);
+  public ModelAndView defaultThrowableHandler(final Exception exception) throws Exception {
+    logException(exception);
     return modelViewFactory.getModelView(ErrorModelViewType.OTHER);
   }
 
-  private void logException(final Exception e) {
-    log.error("Exception handler: " + e);
+  private void logException(final Exception exception) {
+    log.error("Exception handler: " + exception);
   }
 }

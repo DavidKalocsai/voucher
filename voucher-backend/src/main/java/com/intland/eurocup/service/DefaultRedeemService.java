@@ -7,14 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.intland.eurocup.jms.DefaultJmsService;
 import com.intland.eurocup.model.LotStatus;
 import com.intland.eurocup.model.Voucher;
 import com.intland.eurocup.repository.VoucherRepository;
 import com.intland.eurocup.service.lot.LotService;
 import com.intland.eurocup.service.persist.PersistentService;
 import com.intland.eurocup.service.validation.ValidationStrategies;
-import com.intland.eurocup.service.validation.strategy.ValidationStrategy;
 
 
 /**

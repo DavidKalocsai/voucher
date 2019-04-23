@@ -40,14 +40,14 @@ public class MockIoService implements SenderService {
     Runnable runnable = () -> {
       try {
         Thread.sleep(TIMEOUT);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
+      } catch (InterruptedException exception) {
+        exception.printStackTrace();
       }
       responseStorage.register(id);
       responseStorage.save(id, getResponse());
     };
-    Thread t = new Thread(runnable);
-    t.start();
+    Thread thread = new Thread(runnable);
+    thread.start();
   }
 
   private Response getResponse() {

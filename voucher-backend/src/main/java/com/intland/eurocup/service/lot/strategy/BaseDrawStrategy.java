@@ -4,11 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.intland.eurocup.common.model.Territory;
 import com.intland.eurocup.model.LotStatus;
 import com.intland.eurocup.model.Voucher;
 import com.intland.eurocup.repository.VoucherRepository;
-import com.intland.eurocup.service.DefaultRedeemService;
 
 /**
  * Base Draw strategy.

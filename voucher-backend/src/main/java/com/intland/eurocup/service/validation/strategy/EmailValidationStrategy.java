@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.intland.eurocup.model.Voucher;
 import com.intland.eurocup.repository.VoucherRepository;
-import com.intland.eurocup.service.lot.strategy.BaseDrawStrategy;
 import com.intland.eurocup.service.validation.exception.EmailAlreadyInUseException;
 
 /**

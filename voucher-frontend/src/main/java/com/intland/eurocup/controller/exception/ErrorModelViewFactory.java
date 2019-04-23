@@ -15,4 +15,4 @@ public interface ErrorModelViewFactory {
    * @return {@link ModelAndView}
    */
   ModelAndView getModelView(ErrorModelViewType type);
- }
+}

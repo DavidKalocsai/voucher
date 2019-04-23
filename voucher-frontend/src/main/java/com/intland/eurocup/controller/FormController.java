@@ -41,7 +41,7 @@ public class FormController {
    * Builds and returns model and view of submit form.
    * 
    * @param territory {@link Territory}
-   * @return
+   * @return model and view for Voucher Form
    */
   @GetMapping(value = FORM_URL)
   public ModelAndView showSubmitForm(@PathVariable Territory territory) {

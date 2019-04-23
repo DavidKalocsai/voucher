@@ -37,7 +37,7 @@ public class DefaultResponseStorage implements ResponseStorage {
    * 
    * @param requestId id to register.
    */
-  public void register(final Long requestId) {
+  public void register(Long requestId) {
     responses.put(requestId, new Response());
   }
 
