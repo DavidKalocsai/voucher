@@ -25,7 +25,7 @@ public abstract class BaseDrawStrategy implements DrawStrategy {
    * Constructor of BaseDrawStartegy. It is used by child to pass values for draw strategy.
    * @param allTimePrizeLimit total number of prizes. 
    * @param dailyPrizeLimit total daily number of prizes.
-   * @param winningSequence every voucher added modulo "x"th is winning.
+   * @param winningSequence every voucher added modulo "x" th is winning.
    */
   public BaseDrawStrategy(final Long allTimePrizeLimit, final Long dailyPrizeLimit, final Long winningSequence) {
     this.allTimePrizeLimit = allTimePrizeLimit;

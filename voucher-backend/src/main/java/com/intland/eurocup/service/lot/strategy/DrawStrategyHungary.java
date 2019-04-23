@@ -9,6 +9,7 @@ import com.intland.eurocup.common.model.Territory;
  */
 @Service
 public class DrawStrategyHungary extends BaseDrawStrategy {
+  
   private static final Long ALL_TIME_PRIZE_LIMIT = 5000L;
   private static final Long DAILY_PRIZE_LIMIT = 100L;
   private static final Long WINNING_SEQUENCE = 80L;

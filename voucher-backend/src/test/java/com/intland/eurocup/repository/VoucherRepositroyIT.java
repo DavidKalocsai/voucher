@@ -108,7 +108,7 @@ public class VoucherRepositroyIT {
 		setupAllTimeWinner();
 
 		// when
-		final Voucher voucher = repository.save(VoucherTestModel.creaeteVoucher(Territory.GER, LotStatus.WINNER));
+		final Voucher voucher = repository.save(VoucherTestModel.createVoucher(Territory.GER, LotStatus.WINNER));
 		final Long voucherDailySequenceNumber = repository.countVouchersOnDate(voucher.getCreationDate(), voucher.getId(),
 				Territory.GER.getCode());
 		
@@ -122,11 +122,11 @@ public class VoucherRepositroyIT {
 	}
 
 	private void setupAllTimeWinner() {
-		repository.save(VoucherTestModel.creaeteVoucher(Territory.GER, LotStatus.WINNER));
-		repository.save(VoucherTestModel.creaeteVoucher(Territory.HUN, LotStatus.LOSER));
-		repository.save(VoucherTestModel.creaeteVoucher(Territory.GER, LotStatus.WINNER));
-		repository.save(VoucherTestModel.creaeteVoucher(Territory.HUN, LotStatus.WINNER));
-		repository.save(VoucherTestModel.creaeteVoucher(Territory.GER, LotStatus.LOSER));
+		repository.save(VoucherTestModel.createVoucher(Territory.GER, LotStatus.WINNER));
+		repository.save(VoucherTestModel.createVoucher(Territory.HUN, LotStatus.LOSER));
+		repository.save(VoucherTestModel.createVoucher(Territory.GER, LotStatus.WINNER));
+		repository.save(VoucherTestModel.createVoucher(Territory.HUN, LotStatus.WINNER));
+		repository.save(VoucherTestModel.createVoucher(Territory.GER, LotStatus.LOSER));
 	}
 
 	private String getTodayDate() {
